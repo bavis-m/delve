@@ -510,6 +510,9 @@ func hasPathSeparatorPrefix(path string) bool {
 
 // SubstitutePath applies the specified path substitution rules to path.
 func SubstitutePath(path string, rules [][2]string) string {
+	return strings.Replace(SubstitutePathInternal(path, rules), "\\", "/", -1)
+}
+func SubstitutePathInternal(path string, rules [][2]string) string {
 	// Look for evidence that we are dealing with windows somewhere, if we are use case-insensitive matching
 	caseInsensitive := windowsAbsPath(path)
 	if !caseInsensitive {
